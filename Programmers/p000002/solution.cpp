@@ -43,6 +43,6 @@ int mygcd(int numer, int denom) {
     return numer;
 }
 
-int mylcm(int num1, int num2) {
+int mylcm(int num1, int num2) const {
     return num1 * num2 / mygcd(num1, num2);
 }
