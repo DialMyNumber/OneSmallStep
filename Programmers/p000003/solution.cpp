@@ -5,12 +5,15 @@
 #include <iostream>
 #include <sstream>
 
-/* 
+ 
 std::vector<int> solution(std::vector<int> numbers) {
     std::vector<int> answer;
+
+    for(int n : answer) {
+        answer.push_back(n * 2);
+    }
     return answer;
 }
-*/
 
 int main(void) {
     std::vector<int> arr;
@@ -29,10 +32,12 @@ int main(void) {
 
     int i;
     while (ss >> i) {
-        arr.push_back(i * 2);
+        arr.push_back(i);
     }
 
-    for (int i : arr) {
+    std::vector<int> result = solution(arr);
+
+    for (int i : result) {
         std::cout << i << " ";
     }
 
