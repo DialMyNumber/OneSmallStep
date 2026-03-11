@@ -1,5 +1,6 @@
 // https://school.programmers.co.kr/learn/courses/30/lessons/120809
 // Double each element of the array
+// Use Vector
 
 #include <vector>
 #include <iostream>
