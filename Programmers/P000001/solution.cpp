@@ -11,8 +11,11 @@ public:
 	int Multiply(int num1, int num2) const {
 		return num1 * num2;
 	double Divide(int num1, int num2) const {
-		if(num2 !=0) {
-			return num1 / num2;
+		if(num2 == 0) {
+			return 0.0;
+		}
+		else {
+			return (double)num1 / num2;
 		}
 	}
 };
