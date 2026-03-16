@@ -1,6 +1,6 @@
 // https://school.programmers.co.kr/learn/courses/30/lessons/120809
 // Double each element of the array
-// Use Linked List and Structure
+// Use Linked List by Structure
 
 #include <iostream>
 #include <sstream>
