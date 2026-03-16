@@ -16,22 +16,22 @@ int main(void) {
       return 1;
     }
 
-    while (scanf("%d", &x) == 1) {   // Handle input accordingly
+    while (scanf("%d", &x) == 1) {
         if (size == capacity) {
             capacity *= 2;
-            int* temp = realloc(arr, capacity * sizeof(int));
+            int* temp = realloc(arr, capacity * sizeof(int));    // Vector-Stlye Reallocation
+            
             if (NULL == temp) {  // Handle 'realloc Error'
                 free(arr);
                 return 1;
             }
-          
             arr = temp;
-        }  // Vector style
+        }
 
-        arr[size++] = x * 2;
+        arr[size++] = x * 2;    // double each element
     }
 
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; ++i) {
         printf("%d ", arr[i]);
     }
 
