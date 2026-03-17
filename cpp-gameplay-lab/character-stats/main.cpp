@@ -7,7 +7,9 @@ enum Status {
 	HP,				// 0
 	MP,				// 1
 	ATTACK,			// 2
-	ARMOR,			// 3			
+	ARMOR,			// 3
+	LEVEL,
+	SHIELD,
 	STATUS_COUNT	// Total number of status types (for iteration/array size)
 };
 
@@ -66,6 +68,7 @@ void setPotion(int count, int* p_HPPotion, int* p_MPPotion) {
 
 int main(void) {
 	int myCharacterStatus[STATUS_COUNT] = { 0, };
+	myCharacterStatus[LEVEL] = 1;
 
 	do {
 		std::cout << "Enter HP and MP: ";
@@ -135,11 +138,13 @@ int main(void) {
 
 		case 5:
 			std::cout << "HP : " << myCharacterStatus[HP] << ", MP : " << myCharacterStatus[MP]
-				<< ", ATTACK : " << myCharacterStatus[ATTACK] << ", ARMOR : " << myCharacterStatus[ARMOR] << std::endl;
+				<< ", ATTACK : " << myCharacterStatus[ATTACK] << ", ARMOR : " << myCharacterStatus[ARMOR] 
+				<< ", LEVEL : " << myCharacterStatus[LEVEL] << ", SHIELD : " << myCharacterStatus[SHIELD] << std::endl;
 			break;
 
 		case 6:
 			std::cout << "Level Up! Received HP and MP potion, 1 each." << std::endl;
+			myCharacterStatus[LEVEL] += 1;
 			setPotion(1, &myCharacterPotion[HP], &myCharacterPotion[MP]);
 			break;
 
@@ -148,9 +153,11 @@ int main(void) {
 
 		default:
 			std::cout << "Choose a number between 1 and 6, or 0 to exit." << std::endl;
+			myCharacterStatus[SHIELD] -= 1;	// not vaild input
 			break;
 		}
 
+		myCharacterStatus[SHIELD] += 1;	// +1 per input
 		std::cout << std::endl;
 	} while (flag != 0);
 
