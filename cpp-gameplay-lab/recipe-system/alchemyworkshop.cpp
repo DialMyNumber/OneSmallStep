@@ -5,31 +5,44 @@
 #include <vector>
 #include <string>
 
-// PotionRecipe 클래스: 재료 목록을 vector<string>으로 변경
 class PotionRecipe {
-public:
+private:
     std::string potionName;
-    std::vector<std::string> ingredients; // 단일 재료에서 재료 '목록'으로 변경
+    std::vector<std::string> ingredients;
 
-    // 생성자: 재료 목록을 받아 초기화하도록 수정
+public:
+
     PotionRecipe(const std::string& name, const std::vector<std::string>& ingredients)
         : potionName(name), ingredients(ingredients) {
     }
+
+    std::string GetpotionName() const {
+        return potionName;
+    }
+    void SetpotionName(const std::string& name) {
+        potionName = name;
+    }
+
+    const std::vector<std::string>& Getingredients() const {
+        return ingredients;
+    }
+
+    void Setingredients(const std::vector<std::string>& ingredient) {
+        ingredients = ingredient;
+    }
 };
 
-// AlchemyWorkshop 클래스: 레시피 목록을 관리
+
 class AlchemyWorkshop {
 private:
     std::vector<PotionRecipe> recipes;
 
 public:
-    // addRecipe 메서드: 재료 목록(vector)을 매개변수로 받도록 수정
     void addRecipe(const std::string& name, const std::vector<std::string>& ingredients) {
         recipes.push_back(PotionRecipe(name, ingredients));
         std::cout << ">> New recipe: '" << name << "' has been added." << std::endl;
     }
 
-    // 모든 레시피 출력 메서드
     void displayAllRecipes() const {
         if (recipes.empty()) {
             std::cout << "No recipes added yet." << std::endl;
@@ -38,20 +51,44 @@ public:
 
         std::cout << "\n--- [ Recipes List ] ---" << std::endl;
         for (size_t i = 0; i < recipes.size(); ++i) {
-            std::cout << "- Potion: " << recipes[i].potionName << std::endl;
+            std::cout << "- Recipe: " << recipes[i].GetpotionName() << std::endl;
             std::cout << "  > ingredients needed: ";
 
-            // 재료 목록을 순회하며 출력
-            for (size_t j = 0; j < recipes[i].ingredients.size(); ++j) {
-                std::cout << recipes[i].ingredients[j];
-                // 마지막 재료가 아니면 쉼표로 구분
-                if (j < recipes[i].ingredients.size() - 1) {
+            const std::vector<std::string>& temp = recipes[i].Getingredients();
+            int j = 0;
+            for (std::string ingredient : temp) {
+                ++j;
+                std::cout << ingredient;
+                if (j < temp.size()) {
                     std::cout << ", ";
                 }
             }
             std::cout << std::endl;
         }
         std::cout << "---------------------------\n";
+    }
+
+    void searchbyName(const std::string& name) {
+        bool flag = false;
+        for (size_t i = 0; i < recipes.size(); ++i) {
+            if (recipes[i].GetpotionName().find(name) != std::string::npos) {
+                std::cout << "Recipe name: " << recipes[i].GetpotionName() << std::endl;
+                flag = true;
+            }
+
+            for (const auto& ingredient : recipes[i].Getingredients()) {
+                int j = 0;
+                if (ingredient.find(name) != std::string::npos) {
+                    ++j;
+                    std::cout << "Recipe name: " << recipes[i].GetpotionName() << std::endl;
+                    flag = true;
+                }
+            }
+        }
+
+        if (!flag) {
+            std::cout << "No such recipe\n";
+        }
     }
 };
 
@@ -60,10 +97,11 @@ int main() {
     AlchemyWorkshop myWorkshop;
 
     while (true) {
-        std::cout << "Alchemist Workshop System" << std::endl;
+        std::cout << "\nAlchemist Workshop System" << std::endl;
         std::cout << "1. Add a recipe" << std::endl;
         std::cout << "2. Show entire recipes" << std::endl;
-        std::cout << "3. Exit" << std::endl;
+        std::cout << "3. Search recipes" << std::endl;
+        std::cout << "4. Exit" << std::endl;
         std::cout << "Choose: ";
 
         int choice;
@@ -78,11 +116,10 @@ int main() {
 
         if (choice == 1) {
             std::string name;
-            std::cout << "Potion: ";
+            std::cout << "Recipe: ";
             std::cin.ignore(10000, '\n');
             std::getline(std::cin, name);
 
-            // 여러 재료를 입력받기 위한 로직
             std::vector<std::string> ingredients_input;
             std::string ingredient;
             std::cout << "Enter the ingredients needed. (Type 'End' to end)" << std::endl;
@@ -91,14 +128,12 @@ int main() {
                 std::cout << "Ingredient: ";
                 std::getline(std::cin, ingredient);
 
-                // 사용자가 '끝'을 입력하면 재료 입력 종료
                 if (ingredient == "End") {
                     break;
                 }
                 ingredients_input.push_back(ingredient);
             }
 
-            // 입력받은 재료가 하나 이상 있을 때만 레시피 추가
             if (!ingredients_input.empty()) {
                 myWorkshop.addRecipe(name, ingredients_input);
             }
@@ -112,6 +147,13 @@ int main() {
 
         }
         else if (choice == 3) {
+            std::cout << "Type name of recipe or ingredient: ";
+            std::string name;
+            std::cin >> name;
+            myWorkshop.searchbyName(name);
+
+        }
+        else if (choice == 4) {
             std::cout << "Closing Workshop..." << std::endl;
             break;
 
