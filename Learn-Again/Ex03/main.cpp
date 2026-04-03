@@ -20,17 +20,30 @@ public:
     }
 
     void setData(const std::string& str) {
-        Data = new std::string(str);
+        if(Data == nullptr) {
+            Data = new std::string(str);
+        }
+        else {
+            delete Data;
+            Data = new std::string(str);
+        }
     }
 
     ~Rect() {
         std::cout << "Rectangle Destructor called" << std::endl;
-        delete Data;
-        Data = nullptr;
+        if(Data != nullptr) {
+            delete Data;
+            Data = nullptr;
+        }
     }
 
     void printData() const {
-        std::cout << "Data : " + *Data << std::endl;
+        if(Data != nullptr) {
+            std::cout << "Data : " + *Data << std::endl;
+        }
+        else {
+            std::cout << "Data is null" << std::endl;
+        }
     }
 
     int area() const {
