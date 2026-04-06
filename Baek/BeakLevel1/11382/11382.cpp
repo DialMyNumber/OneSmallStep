@@ -1,6 +1,7 @@
 // https://www.acmicpc.net/problem/11382
 
 #include <iostream>
+#include "oversize.h"
 
 int main(void) {
 	// 10^12? -> 1 2 3 4 5 6 7 8 9 10 11 12 = 10Á¶
@@ -14,5 +15,10 @@ int main(void) {
 	std::cin >> b;
 	std::cin >> c;
 
-	std::cout << a + b + c;
+	std::cout << a + b + c << std::endl;
+
+	oversize num1 = oversize("123456789012345678901234");
+	oversize num2 = oversize("323215648766454898");
+
+	std::cout << oversize::Calc(num1, num2, 5);
 }
