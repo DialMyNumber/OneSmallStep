@@ -84,3 +84,16 @@ DerivedDataCache
 
 # Prerequisites
 .d
+*.sln
+*.vcxproj
+*.filters
+*.user
+*.recipe
+*.ilk
+*.log
+*.obj
+*.idb
+*.pdb
+*.tlog
+*.exe
+*.enc
