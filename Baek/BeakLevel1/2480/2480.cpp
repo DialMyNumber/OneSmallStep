@@ -22,17 +22,17 @@ int main(void) {
 			std::cout << 1000 + a * 100;
 		}
 	}
+	else {
+		int big = a;
+		if (big < b) {
+			big = b;
+		}
 
-	int big = a;
-	if (big < b) {
-		big = b;
+		if (big < c) {
+			big = c;
+		}
+
+		std::cout << big * 100;
 	}
-
-	if (big < c) {
-		big = c;
-	}
-
-	std::cout << big * 100;
-
 	return 0;
 }
