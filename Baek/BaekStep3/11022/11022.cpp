@@ -17,4 +17,6 @@ int main(void) {
 
 		std::cout << "Case #" << i << ": " << a << " + " << b << " = " << a + b << '\n';
 	}
+
+	return 0;
 }
