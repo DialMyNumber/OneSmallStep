@@ -30,4 +30,5 @@ int main(void) {
 
 	std::cout << avg / max * 100.0f;
 
+	return 0;
 }
