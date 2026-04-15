@@ -12,6 +12,7 @@ int main(void) {
 	int sum = 0;
 	for (int i = 0; i < N; ++i) {
 		sum += (int)str[i] - (int)'0'; // 0123456789
+		//sum += (int)(str[i] - '0'); // µ¿ÀÏ
 	}
 
 	std::cout << sum;
